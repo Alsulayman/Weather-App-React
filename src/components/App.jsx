@@ -1,22 +1,40 @@
 import React, { useState } from "react";
 
 const App = () => {
+  // State to hold the input value for the city
   const [cityValue, setCityValue] = useState("");
+
+  // State to hold weather data received from the API
   const [weatherData, setWeatherData] = useState(null);
+
+  // State to hold error messages in case of API request failure
   const [error, setError] = useState("");
 
+  // API key for OpenWeatherMap
   const api = "";
+
+  // API URL constructed with the city input value and the API key
   const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityValue}&appid=${api}&units=metric`;
 
+  // Function to handle form submission
   const handleSubmit = async (event) => {
+    // To not Refresh
     event.preventDefault();
 
     try {
+      // Fetch data from the OpenWeatherMap API
       const response = await fetch(apiUrl);
+
+      // Parse the response data as JSON
       const data = await response.json();
+
+      // Update the weather data state with the fetched data
       setWeatherData(data);
+
+      // Clear any previous error messages if exist
       setError("");
     } catch (error) {
+      // If there's an error, set weather data to null and display an error message
       setWeatherData(null);
       setError("No City was found on the Server");
     }
