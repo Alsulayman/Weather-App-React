@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import Navbar from "./Navbar";
+import { useEffect } from "react";
 
 const App = () => {
   // State to hold the input value for the city
-  const [cityValue, setCityValue] = useState("");
+  const [cityValue, setCityValue] = useState("berlin");
 
   // State to hold weather data received from the API
   const [weatherData, setWeatherData] = useState(null);
@@ -20,7 +21,9 @@ const App = () => {
   // Function to handle form submission
   const handleSubmit = async (event) => {
     // To not Refresh
-    event.preventDefault();
+    if (event) {
+      event.preventDefault();
+    }
 
     try {
       // Fetch data from the OpenWeatherMap API
@@ -37,10 +40,15 @@ const App = () => {
     } catch (error) {
       // If there's an error, set weather data to null and display an error message
       setWeatherData(null);
-      setError("No City was found on the Server");
+      setError("No City was found");
     }
-    console.log(weatherData);
   };
+  useEffect(() => {
+    // Call the handleSubmit function when the component mounts
+    handleSubmit();
+    setCityValue("");
+  }, []);
+  console.log(weatherData);
 
   return (
     <>
@@ -52,66 +60,38 @@ const App = () => {
         cityValue={cityValue}
         setCityValue={setCityValue}
       />
-      <div className="app">
-        <div className="container">
-          <h1>LIVE° Weather</h1>
-          <form onSubmit={handleSubmit}>
-            <input
-              type="text"
-              id="city-name"
-              placeholder="Enter City"
-              value={cityValue}
-              onChange={(e) => setCityValue(e.target.value)}
-              className="city-input"
-            />
-            <input
-              type="submit"
-              value="Get Weather"
-              className="submit-button"
-            />
-          </form>
-          <div id="main-div">
-            {weatherData && (
-              <>
-                <div className="icon">
-                  <img
-                    src={`http://openweathermap.org/img/wn/${weatherData.weather[0].icon}.png`}
-                    alt="Weather Icon"
-                  />
-                </div>
-                <div
-                  className="description"
-                  style={{ color: "rgb(252, 252, 252)" }}
-                >
-                  {weatherData.weather[0].description}
-                </div>
-                <br />
-                <div className="temperature">
-                  Temperature in Celsius: {weatherData.main.temp} °C
-                </div>
-                <div className="kelvin">
-                  Temperature in Kelvin: {weatherData.main.temp + 273.15} k
-                </div>
-                <div className="fahrenheit">
-                  Temperature in Fahrenheit:{" "}
-                  {(weatherData.main.temp * 9) / 5 + 32} °F
-                </div>
-                <div className="details">
-                  Humidity is: {weatherData.main.humidity}%
-                </div>
-              </>
-            )}
-            {error && (
-              <div className="error">
-                {error}
+
+      <div className="container">
+        <h1>LIVE° Weather</h1>
+
+        <div id="main-div">
+          {weatherData && (
+            <>
+              <div className="icon">
                 <img
-                  src="https://cdn-icons-png.flaticon.com/512/5201/5201284.png"
-                  width="50px"
-                  height="50px"
+                  src={`http://openweathermap.org/img/wn/${weatherData.weather[0].icon}.png`}
+                  alt="Weather Icon"
                 />
               </div>
-            )}
-          </div>
+              <div className="description">
+                {weatherData.weather[0].description}
+              </div>
+              <br />
+              <div className="temperature">
+                Temperature in Celsius: {weatherData.main.temp} °C
+              </div>
+              <div className="kelvin">
+                Temperature in Kelvin: {weatherData.main.temp + 273.15} k
+              </div>
+              <div className="fahrenheit">
+                Temperature in Fahrenheit:{" "}
+                {(weatherData.main.temp * 9) / 5 + 32} °F
+              </div>
+              <div className="details">
+                Humidity is: {weatherData.main.humidity}%
+              </div>
+            </>
+          )}
         </div>
       </div>
     </>
