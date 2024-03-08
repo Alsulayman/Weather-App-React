@@ -46,6 +46,7 @@ const App = () => {
   useEffect(() => {
     // Call the handleSubmit function when the component mounts
     handleSubmit();
+    // empty the Search field
     setCityValue("");
   }, []);
   console.log(weatherData);
