@@ -36,13 +36,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-function Navbar({
-  weatherData,
-
-  handleSubmit,
-  cityValue,
-  setCityValue,
-}) {
+function Navbar({ weatherData, handleSubmit, cityValue, setCityValue }) {
   return (
     <>
       <AppBar position="static">
@@ -53,7 +47,7 @@ function Navbar({
             sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
             variant="h6"
           >
-            {weatherData && weatherData.main ? (
+            {weatherData ? (
               <Typography variant="h6">
                 {weatherData.name} {weatherData.sys.country}
               </Typography>

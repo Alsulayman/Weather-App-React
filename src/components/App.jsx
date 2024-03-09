@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Navbar from "./Navbar";
 import { useEffect } from "react";
+import DividerVariants from "./WeatherDisplay";
 
 const App = () => {
   // State to hold the input value for the city
@@ -62,39 +63,7 @@ const App = () => {
         setCityValue={setCityValue}
       />
 
-      <div className="container">
-        <h1>LIVE° Weather</h1>
-
-        <div id="main-div">
-          {weatherData && (
-            <>
-              <div className="icon">
-                <img
-                  src={`http://openweathermap.org/img/wn/${weatherData.weather[0].icon}.png`}
-                  alt="Weather Icon"
-                />
-              </div>
-              <div className="description">
-                {weatherData.weather[0].description}
-              </div>
-              <br />
-              <div className="temperature">
-                Temperature in Celsius: {weatherData.main.temp} °C
-              </div>
-              <div className="kelvin">
-                Temperature in Kelvin: {weatherData.main.temp + 273.15} k
-              </div>
-              <div className="fahrenheit">
-                Temperature in Fahrenheit:{" "}
-                {(weatherData.main.temp * 9) / 5 + 32} °F
-              </div>
-              <div className="details">
-                Humidity is: {weatherData.main.humidity}%
-              </div>
-            </>
-          )}
-        </div>
-      </div>
+      <DividerVariants weatherData={weatherData} />
     </>
   );
 };
