@@ -5,13 +5,20 @@ import Divider from "@mui/material/Divider";
 import Typography from "@mui/material/Typography";
 
 const style = {
-  py: 0,
+  py: 10,
   width: "100%",
-  maxWidth: 360,
+  maxWidth: 500,
+
   borderRadius: 2,
   border: "1px solid",
   borderColor: "divider",
   backgroundColor: "background.paper",
+  margin: "auto", // Center horizontally
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)", // Center vertically
+  background: "#B4D4FF",
 };
 
 function DividerVariants({ weatherData }) {
