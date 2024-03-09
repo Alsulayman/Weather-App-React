@@ -40,7 +40,13 @@ function Navbar({ weatherData, handleSubmit, cityValue, setCityValue }) {
   return (
     <>
       <AppBar position="static">
-        <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+        <Toolbar
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            background: "#176B87",
+          }}
+        >
           <Typography
             noWrap
             component="div"
