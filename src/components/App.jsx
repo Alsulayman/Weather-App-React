@@ -30,27 +30,33 @@ const App = () => {
       // Fetch data from the OpenWeatherMap API
       const response = await fetch(apiUrl);
 
-      // Parse the response data as JSON
-      const data = await response.json();
+      // Check if the response status is OK
+      if (response.ok) {
+        // Parse the response data as JSON
+        const data = await response.json();
 
-      // Update the weather data state with the fetched data
-      setWeatherData(data);
+        // Update the weather data state with the fetched data
+        setWeatherData(data);
 
-      // Clear any previous error messages if exist
-      setError("");
+        // Clear any previous error messages if exist
+        setError("");
+      } else {
+        // If the response status is not OK, throw an error
+        throw new Error("Failed to fetch data");
+      }
     } catch (error) {
       // If there's an error, set weather data to null and display an error message
       setWeatherData(null);
       setError("No City was found");
     }
   };
+
   useEffect(() => {
     // Call the handleSubmit function when the component mounts
     handleSubmit();
     // empty the Search field
     setCityValue("");
   }, []);
-  console.log(weatherData);
 
   return (
     <>
@@ -62,7 +68,8 @@ const App = () => {
         cityValue={cityValue}
         setCityValue={setCityValue}
       />
-
+      {/* Conditionally render the error message */}
+      {error && <p>Error: {error}</p>}
       <DividerVariants weatherData={weatherData} />
     </>
   );

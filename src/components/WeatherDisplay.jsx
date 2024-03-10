@@ -5,10 +5,9 @@ import Divider from "@mui/material/Divider";
 import Typography from "@mui/material/Typography";
 
 const style = {
-  py: 10,
+  py: 7,
   width: "100%",
-  maxWidth: 500,
-
+  maxWidth: 400,
   borderRadius: 2,
   border: "1px solid",
   borderColor: "divider",
@@ -28,27 +27,34 @@ function DividerVariants({ weatherData }) {
       {weatherData ? (
         <List sx={style}>
           <ListItem>
+            {" "}
             <Typography variant="h5">
-              <img
-                src={`http://openweathermap.org/img/wn/${weatherData.weather[0].icon}.png`}
-                alt="Weather Icon"
-              />{" "}
+              {weatherData.name} {weatherData.sys.country}
             </Typography>
+          </ListItem>
+          <Divider variant="middle" component="li" />
+          <ListItem>
+            <img
+              src={`http://openweathermap.org/img/wn/${weatherData.weather[0].icon}.png`}
+              alt="Weather Icon"
+            />
             <Typography>{weatherData.weather[0].description}</Typography>
           </ListItem>
           <Divider component="li" />
-          <ListItem> Celsius: {weatherData.main.temp} °C</ListItem>
+          <ListItem> Celsius: {Math.round(weatherData.main.temp)} °C</ListItem>
           <Divider variant="inset" component="li" />
-          <ListItem>Kelvin: {weatherData.main.temp + 273.15} k</ListItem>
+          <ListItem>
+            Kelvin: {Math.round(weatherData.main.temp + 273.15)} k
+          </ListItem>
           <Divider variant="middle" component="li" />
           <ListItem>
-            Fahrenheit: {(weatherData.main.temp * 9) / 5 + 32} °F
+            Fahrenheit: {Math.round((weatherData.main.temp * 9) / 5 + 32)} °F
           </ListItem>
           <Divider variant="inset" component="li" />
           <ListItem>Humidity: {weatherData.main.humidity}%</ListItem>
         </List>
       ) : (
-        <Typography variant="h6">Loading...</Typography>
+        <Typography variant="h6"></Typography>
       )}
     </>
   );
