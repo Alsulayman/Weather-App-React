@@ -11,7 +11,7 @@
     "predeploy": "vite build", 
     "deploy": "gh-pages -d dist"
   },
-  "homepage": "https://github.com/Alsulayman/Weather-App-React-MUI", 
+  "homepage": "https://Alsulayman.github.io/Weather-App-React-MUI", 
   "dependencies": {
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
