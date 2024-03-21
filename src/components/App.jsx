@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Navbar from "./Navbar";
 import { useEffect } from "react";
 import DividerVariants from "./WeatherDisplay";
-import ComboBox from "./ComboBox";
 
 const App = () => {
   // State to hold the input value for the city
@@ -77,7 +76,6 @@ const App = () => {
       {/* Conditionally render the error message */}
       {error && <p>Error: {error}</p>}
       <DividerVariants weatherData={weatherData} />
-      <ComboBox />
     </>
   );
 };
