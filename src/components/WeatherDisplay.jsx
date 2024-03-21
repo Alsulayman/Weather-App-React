@@ -3,6 +3,9 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import Divider from "@mui/material/Divider";
 import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import Skeleton from "@mui/material/Skeleton";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const style = {
   py: 7,
@@ -54,7 +57,17 @@ function DividerVariants({ weatherData }) {
           <ListItem>Humidity: {weatherData.main.humidity}%</ListItem>
         </List>
       ) : (
-        <Typography variant="h6"></Typography>
+        <Box
+          sx={{
+            width: 400,
+            margin: "8vh auto",
+
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Skeleton animation="pulse" sx={{ margin: "0" }} height={600} />
+        </Box>
       )}
     </>
   );

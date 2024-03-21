@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Navbar from "./Navbar";
 import { useEffect } from "react";
 import DividerVariants from "./WeatherDisplay";
+import ComboBox from "./ComboBox";
 
 const App = () => {
   // State to hold the input value for the city
@@ -52,10 +53,15 @@ const App = () => {
   };
 
   useEffect(() => {
-    // Call the handleSubmit function when the component mounts
-    handleSubmit();
-    // empty the Search field
-    setCityValue("");
+    // Delay the initial API call by 1000 milliseconds (1 second)
+    setTimeout(() => {
+      // Call the handleSubmit function after the delay
+      handleSubmit();
+      // empty the Search field
+      setCityValue("");
+    }, 3000);
+
+    // Clear the timeout if the component unmounts or useEffect runs again
   }, []);
 
   return (
@@ -71,6 +77,7 @@ const App = () => {
       {/* Conditionally render the error message */}
       {error && <p>Error: {error}</p>}
       <DividerVariants weatherData={weatherData} />
+      <ComboBox />
     </>
   );
 };
